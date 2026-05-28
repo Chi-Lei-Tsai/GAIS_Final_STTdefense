@@ -1,0 +1,15 @@
+accelerate
+datasets
+huggingface_hub
+librosa
+matplotlib
+numpy
+pandas
+pyannote.audio
+pyarrow
+scipy
+soundfile
+torch
+torchaudio
+transformers
+tqdm
