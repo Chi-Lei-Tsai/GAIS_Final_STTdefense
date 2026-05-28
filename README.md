@@ -18,6 +18,9 @@ The supported path is:
 5. Return a pass/refuse safety judgment from the structured guard.
 
 Whisper-large is the default ASR model for the structured-provenance defense.
+It is loaded once during defense setup and reused across rows. ASR model
+switching is disabled by default because alternating between Whisper-small and
+Whisper-large repeatedly unloads/reloads model weights and is slower on GPU.
 Older Whisper-small and routed-ASR experiments are preserved under
 `eval/scripts/archive/` and `docs/archive/`.
 

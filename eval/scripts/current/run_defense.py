@@ -203,7 +203,9 @@ def main() -> None:
     ap.add_argument("--asr-model", default=None,
                     help="Override structured provenance ASR model.")
     ap.add_argument("--overlap-asr-model", default=None,
-                    help="Use this ASR model when diarization detects overlapping speech.")
+                    help="Use this ASR model when diarization detects overlapping speech. Requires --allow-asr-model-switching.")
+    ap.add_argument("--allow-asr-model-switching", action="store_true",
+                    help="Allow switching between --asr-model and --overlap-asr-model. Disabled by default to keep Whisper loaded once.")
     ap.add_argument("--asr-max-new-tokens", type=int, default=None,
                     help="Override Whisper max_new_tokens.")
     ap.add_argument("--asr-mode", choices=["diarized_segments", "whole_timestamped"], default=None,
@@ -220,6 +222,8 @@ def main() -> None:
         os.environ["STRUCTURED_PROVENANCE_ASR_MODEL"] = args.asr_model
     if args.overlap_asr_model:
         os.environ["STRUCTURED_PROVENANCE_OVERLAP_ASR_MODEL"] = args.overlap_asr_model
+    if args.allow_asr_model_switching:
+        os.environ["STRUCTURED_PROVENANCE_ALLOW_ASR_MODEL_SWITCHING"] = "1"
     if args.asr_max_new_tokens is not None:
         os.environ["STRUCTURED_PROVENANCE_WHISPER_MAX_NEW_TOKENS"] = str(args.asr_max_new_tokens)
     if args.asr_mode:

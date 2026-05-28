@@ -476,10 +476,15 @@ class StructuredProvenance(Defense):
             "STRUCTURED_PROVENANCE_ENABLE_TARGETED_OVERLAP_ASR",
             True,
         )
+        allow_asr_model_switching = _env_flag(
+            "STRUCTURED_PROVENANCE_ALLOW_ASR_MODEL_SWITCHING",
+            False,
+        )
         self._builder = ProvenanceTimelineBuilder(
             diarization_model=diarization_model,
             whisper_id=asr_model,
             overlap_whisper_id=overlap_asr_model,
+            allow_asr_model_switching=allow_asr_model_switching,
             whisper_max_new_tokens=whisper_max_new_tokens,
             asr_mode=asr_mode,
             prefer_cuda=prefer_cuda,

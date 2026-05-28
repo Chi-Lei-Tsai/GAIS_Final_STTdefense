@@ -31,7 +31,8 @@ a safe command is a later extension, not the first deployable contract.
 Current implementation default: pyannote diarization plus
 `openai/whisper-large-v3` timestamped whole-audio ASR. Whisper-small and
 diarization-routed ASR remain archived ablations, not the default
-pipeline.
+pipeline. The ASR model is preloaded once during defense setup and reused
+across samples; model switching is opt-in only.
 
 This replaces the current "mute candidate segments and compare LALM
 outputs" mechanism as the main defense path. Ablation can remain as an

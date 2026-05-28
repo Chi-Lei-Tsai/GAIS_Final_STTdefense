@@ -121,7 +121,17 @@ def main() -> None:
         default=None,
         help=(
             "Use this ASR model when diarization detects overlapping speech. "
-            "Also available via STRUCTURED_PROVENANCE_OVERLAP_ASR_MODEL."
+            "Requires --allow-asr-model-switching. Also available via "
+            "STRUCTURED_PROVENANCE_OVERLAP_ASR_MODEL."
+        ),
+    )
+    ap.add_argument(
+        "--allow-asr-model-switching",
+        action="store_true",
+        help=(
+            "Allow the pipeline to switch between --asr-model and "
+            "--overlap-asr-model. Disabled by default so Whisper-large is "
+            "loaded once and reused for the whole run."
         ),
     )
     ap.add_argument(
@@ -194,6 +204,8 @@ def main() -> None:
         os.environ["STRUCTURED_PROVENANCE_ASR_MODEL"] = args.asr_model
     if args.overlap_asr_model:
         os.environ["STRUCTURED_PROVENANCE_OVERLAP_ASR_MODEL"] = args.overlap_asr_model
+    if args.allow_asr_model_switching:
+        os.environ["STRUCTURED_PROVENANCE_ALLOW_ASR_MODEL_SWITCHING"] = "1"
     if args.asr_max_new_tokens is not None:
         os.environ["STRUCTURED_PROVENANCE_WHISPER_MAX_NEW_TOKENS"] = str(
             args.asr_max_new_tokens

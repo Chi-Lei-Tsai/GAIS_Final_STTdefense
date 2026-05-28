@@ -696,10 +696,16 @@ class ProvenanceTimelineBuilder:
         enable_targeted_overlap_asr: bool = True,
         targeted_overlap_asr_max_segments: int = 16,
         whole_asr_max_new_tokens: int | None = None,
+        allow_asr_model_switching: bool = False,
     ):
         self.diarization_model = diarization_model
         self.whisper_id = whisper_id
-        self.overlap_whisper_id = overlap_whisper_id or whisper_id
+        self.allow_asr_model_switching = allow_asr_model_switching
+        self.overlap_whisper_id = (
+            overlap_whisper_id
+            if allow_asr_model_switching and overlap_whisper_id
+            else whisper_id
+        )
         self.prefer_cuda = prefer_cuda
         self.include_non_speech = include_non_speech
         self.transcript_classifier = transcript_classifier
@@ -746,6 +752,8 @@ class ProvenanceTimelineBuilder:
             self._whisper_dtype = _torch.bfloat16
         else:
             self._whisper_dtype = _torch.float32
+
+        self._activate_whisper_model(self.whisper_id)
 
         if self.transcript_classifier is not None:
             self.transcript_classifier.setup()
@@ -1075,11 +1083,17 @@ class ProvenanceTimelineBuilder:
         return segments
 
     def _select_whisper_id(self, overlap_windows: list[tuple[float, float]]) -> str:
-        if overlap_windows and self.overlap_whisper_id:
+        if (
+            self.allow_asr_model_switching
+            and overlap_windows
+            and self.overlap_whisper_id
+        ):
             return self.overlap_whisper_id
         return self.whisper_id
 
     def _asr_model_routing(self, overlap_windows: list[tuple[float, float]]) -> str:
+        if not self.allow_asr_model_switching:
+            return "single_model_no_switching"
         if self.overlap_whisper_id == self.whisper_id:
             return "single_model"
         if overlap_windows:
