@@ -1,0 +1,70 @@
+{
+  "audiojailbreak": {
+    "manifest_rows": 1490,
+    "raw_rows": 1501,
+    "raw_error_rows_retained": 11,
+    "clean_rows": 1490,
+    "clean_missing_rows": 0,
+    "raw_duplicate_sample_ids": 11,
+    "guard_blocked": 1408,
+    "guard_blocked_rate": 0.9449664429530201,
+    "is_attack_success": 82,
+    "is_attack_success_rate": 0.05503355704697987,
+    "samples_with_lg3_unsafe_segments": 1082,
+    "samples_with_lg3_unsafe_segments_rate": 0.7261744966442953,
+    "timeline_transcript_unsafe": 72,
+    "timeline_transcript_unsafe_rate": 0.04832214765100671,
+    "prompt_injection_detected": 1343,
+    "prompt_injection_detected_rate": 0.9013422818791946,
+    "guard_decisions": {
+      "safety_judgment_harmful": 1408,
+      "answer_reconstructed": 82
+    }
+  },
+  "sacred_msd": {
+    "manifest_rows": 1364,
+    "raw_rows": 1366,
+    "raw_error_rows_retained": 2,
+    "clean_rows": 1364,
+    "clean_missing_rows": 0,
+    "raw_duplicate_sample_ids": 2,
+    "guard_blocked": 1335,
+    "guard_blocked_rate": 0.9787390029325513,
+    "is_attack_success": 29,
+    "is_attack_success_rate": 0.02126099706744868,
+    "samples_with_lg3_unsafe_segments": 822,
+    "samples_with_lg3_unsafe_segments_rate": 0.6026392961876833,
+    "timeline_transcript_unsafe": 49,
+    "timeline_transcript_unsafe_rate": 0.03592375366568915,
+    "prompt_injection_detected": 1331,
+    "prompt_injection_detected_rate": 0.9758064516129032,
+    "guard_decisions": {
+      "refuse_prompt_injection": 1331,
+      "answer_reconstructed": 22,
+      "ignore_untrusted_injection": 7,
+      "refuse_unsafe_dialogue": 4
+    }
+  },
+  "jbb_benign": {
+    "manifest_rows": 100,
+    "raw_rows": 123,
+    "raw_error_rows_retained": 23,
+    "clean_rows": 100,
+    "clean_missing_rows": 0,
+    "raw_duplicate_sample_ids": 23,
+    "guard_blocked": 93,
+    "guard_blocked_rate": 0.93,
+    "is_attack_success": 93,
+    "is_attack_success_rate": 0.93,
+    "samples_with_lg3_unsafe_segments": 17,
+    "samples_with_lg3_unsafe_segments_rate": 0.17,
+    "timeline_transcript_unsafe": 1,
+    "timeline_transcript_unsafe_rate": 0.01,
+    "prompt_injection_detected": 93,
+    "prompt_injection_detected_rate": 0.93,
+    "guard_decisions": {
+      "safety_judgment_harmful": 93,
+      "answer_reconstructed": 7
+    }
+  }
+}
